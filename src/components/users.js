@@ -11,30 +11,30 @@ export const Users = () => {
   let num = users.length;
 
   //מחיקת משימות שנעשו
-  const deleteALL = async () => {
-    //לפני קריאות שרת
-    // const tasksAfterDone=tasks.filter(m=>m.done==false);
-    // setTasks(tasksAfterDone);
-    // SetTasksAfter(tasksAfterDone);
-    // SetCount(count-(num-tasksAfterDone.length));
+  // const deleteALL = async () => {
+  //   //לפני קריאות שרת
+  //   // const tasksAfterDone=tasks.filter(m=>m.done==false);
+  //   // setTasks(tasksAfterDone);
+  //   // SetTasksAfter(tasksAfterDone);
+  //   // SetCount(count-(num-tasksAfterDone.length));
 
-    //אחרי קריאות שרת
-    try {
-     //  עובד מחיקה של משימות שנעשו ב"ה
-     await DeleteTasks().then(()=>{
-      loadTasks().then((data)=>{
-        setTasks([...data]);  
-      });
-     });
+  //   //אחרי קריאות שרת
+  //   try {
+  //    //  עובד מחיקה של משימות שנעשו ב"ה
+  //    await DeleteTasks().then(()=>{
+  //     loadTasks().then((data)=>{
+  //       setTasks([...data]);  
+  //     });
+  //    });
 
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   useEffect(() => {
     console.log('useEffect');
-    SetTasksAfter(users);
+    SetUsersAfter(users);
 },[users]);
 
 //   useEffect(() => {
