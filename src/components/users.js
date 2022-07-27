@@ -8,7 +8,6 @@ export const Users = () => {
   console.log(users);
   const [usersAfter, SetUsersAfter] = useState(users);
 //   const [tasksFilter, SetTasksFilter] = useState(tasks);
-  let num = users.length;
 
   //מחיקת משימות שנעשו
   // const deleteALL = async () => {
@@ -50,7 +49,6 @@ export const Users = () => {
 
   return (
     <div>
-      <h4>{num}  Users </h4>
       {/* <select onChange={(event) => SetTasksFilter(event.target.value)}>
         <option value="all">all</option>
         <option value="done">done</option>
@@ -62,14 +60,14 @@ export const Users = () => {
       <button> <Link to="updateUser">Update User</Link></button>
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
-      <ul>
+      {/* <ul>
         {usersAfter.map((u) => (
           <li key={u.id}>
             {" "}
             <Link to={`/user/${u.id}`}> {u.name} </Link>{" "}
           </li>
         ))}
-      </ul>
+      </ul> */}
       <Outlet />
     </div>
   );

@@ -23,7 +23,7 @@ export const loadUser = async (id) =>
 }
 
 //הוספת משתמש-v
-export const addTask = async (user) => 
+export const addUser = async (user) => 
 {
     try {
         return await axios.post('https://meetings-test.herokuapp.com/user/',user);} 
