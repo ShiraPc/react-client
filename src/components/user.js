@@ -7,9 +7,11 @@ import { loadUsers, UpdateUser, loadUser } from '../data/usersApi';
 export const User = () => {
     const { userId } = useParams();
     console.log(userId);
+    const usersnow = [{name:"iih", id:userId}, {name:"iii", id:"84545"}]
     const [users, setUsers] = useRecoilState(usersState);
     const navigate = useNavigate();
     const user = users.find(u => u.id === (parseInt(userId)));
+    // const user = {name:"iih", id:userId};
     console.log(user);
     const [name, setName] = useState(user?.name);
     // const [done, setDone] = useState(task?.done);
