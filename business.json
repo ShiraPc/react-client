@@ -1,0 +1,63 @@
+{
+    "userId":"7e4147a3-bcfb-4f5d-8c5b-9eab9b66d816",
+    "businessDetails":{
+        "ownersName": "Shira&esti",
+        "businessName": "hair style",
+        "description":"a great place for learning hair style. to look good every day!",
+        "services":[
+                {
+                    "serviceName":"coloring",
+                    "numOfMeetings":4,
+                    "durationOfMeeting":"45 miniutes",
+                    "cost":"200$",
+                    "OpeningHours":"10:00-20:00",
+                    "address":{
+                        "city":"Tiberias",
+                        "street":"rimon",
+                        "number":5
+                    }
+                },
+                {
+                    "serviceName":"haircut",
+                    "numOfMeetings":7,
+                    "durationOfMeeting":"60 miniutes",
+                    "cost":"300$",
+                    "OpeningHours":"10:00-20:00",
+                    "address":{
+                        "city":"Tiberias",
+                        "street":"rimon",
+                        "number":5
+                    }
+                },{
+                    "serviceName":"hairstyles",
+                    "numOfMeetings":10,
+                    "durationOfMeeting":"45 miniutes",
+                    "cost":"500$",
+                    "OpeningHours":"10:00-20:00",
+                    "address":{
+                        "city":"Tiberias",
+                        "street":"rimon",
+                        "number":5
+                    }
+                },{
+                    "serviceName":"panes",
+                    "numOfMeetings":8,
+                    "durationOfMeeting":"1 hour",
+                    "cost":"400$",
+                    "OpeningHours":"10:00-20:00",
+                    "address":{
+                        "city":"Tiberias",
+                        "street":"rimon",
+                        "number":5
+                }
+            }
+        ]
+    }
+}
+
+
+
+
+
+
+
