@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { usersState } from '../data/atoms';
-import { loadUsers, UpdateUser, loadUser } from '../data/usersApi';
+import { Updateuser } from '../data/usersApi';
 
-export const User = () => {
-    const { userId } = useParams();
-    console.log(userId);
-    const usersnow = [{name:"iih", id:userId}, {name:"iii", id:"84545"}]
+export const User = (props) => {
+    // const { userId } = useParams();
+    const location = useLocation();
+    const form = location.state;
+    console.log(form.id);
     const [users, setUsers] = useRecoilState(usersState);
     const navigate = useNavigate();
-    const user = users.find(u => u.id === (parseInt(userId)));
+    const user = users.find(u => u.id === (parseInt(form.id)));
     // const user = {name:"iih", id:userId};
     console.log(user);
     const [name, setName] = useState(user?.name);
@@ -22,13 +23,13 @@ export const User = () => {
     useEffect(() => {
         if (!user) {
             console.log('no users');
-            navigate('/users');  // דוגמא לניווט ע"י קוד
+            navigate('/user');  // דוגמא לניווט ע"י קוד
         }
         else {
             setName(user.name);
             // setDone(task.done);
         }
-    }, [userId, user]);
+    }, [form.id, user]);
     useEffect(() => {
         console.log('run after every state or prop change');
     });
@@ -75,11 +76,12 @@ export const User = () => {
 
         //אחרי קריאות שרת
         //עובד עדכון משימה ב"ה
-        await UpdateUser(id, newUser).then(()=>{
-            loadUsers().then((data)=>{
-              setUsers([...data]);  
-            });
-           });
+        await Updateuser(id, newUser);
+        // .then(()=>{
+        //     loadUsers().then((data)=>{
+        //       setUsers([...data]);  
+        //     });
+        //    });
       
         navigate('/user'); // ניווט חזרה למשימות
     }
@@ -116,7 +118,7 @@ export const User = () => {
             <br />
             <button type="submit">שמור</button>
             <br /><br />
-            <button onClick={() => UpdateUser(user)}>Update</button>
+            <button onClick={() => Updateuser(user)}>Update</button>
         </form> : ' ';
 
 }

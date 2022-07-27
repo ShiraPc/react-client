@@ -6,6 +6,6 @@ import { loadUsers } from './usersApi';
 // כל קומפוננטה שתרשם אליה, שינוי של האטום יגרום לקומפוננטה להתעדכן.
 export const usersState = atom({
     key: 'usersState',
-    // default: loadUsers(),
-    default:[{name: 'John', id: '1233'}, {name: 'dfg', id: '1234'}]
+    default: loadUsers(),
+    // default:[{name: 'John', id: '1233'}, {name: 'dfg', id: '1234'}]
 });

@@ -1,51 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { usersState } from '../data/atoms.js';
+import { useNavigate } from 'react-router-dom';
 
 export const Users = () => {
-  const [users,setUsers] = useRecoilState(usersState);
+  const [users, setUsers] = useRecoilState(usersState);
+  const [id, setId] = useState(null);
   console.log(users);
   const [usersAfter, SetUsersAfter] = useState(users);
-//   const [tasksFilter, SetTasksFilter] = useState(tasks);
-
-  //מחיקת משימות שנעשו
-  // const deleteALL = async () => {
-  //   //לפני קריאות שרת
-  //   // const tasksAfterDone=tasks.filter(m=>m.done==false);
-  //   // setTasks(tasksAfterDone);
-  //   // SetTasksAfter(tasksAfterDone);
-  //   // SetCount(count-(num-tasksAfterDone.length));
-
-  //   //אחרי קריאות שרת
-  //   try {
-  //    //  עובד מחיקה של משימות שנעשו ב"ה
-  //    await DeleteTasks().then(()=>{
-  //     loadTasks().then((data)=>{
-  //       setTasks([...data]);  
-  //     });
-  //    });
-
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  const navigate = useNavigate();
+  const ShowUser = (id) => {
+    navigate('showUser', {state:{id: id}});
+  }
 
   useEffect(() => {
     console.log('useEffect');
     SetUsersAfter(users);
-},[users]);
+  }, [users]);
 
-//   useEffect(() => {
-//     switch (tasksFilter) {
-//       case "all": SetTasksAfter(tasks);
-//         break;
-//       case "done": SetTasksAfter(tasks.filter(f => f.done === true));
-//         break;
-//       case "not_done": SetTasksAfter(tasks.filter(z => z.done === false));
-//         break;
-//     }
-//   }, [tasks, tasksFilter])
+  //   useEffect(() => {
+  //     switch (tasksFilter) {
+  //       case "all": SetTasksAfter(tasks);
+  //         break;
+  //       case "done": SetTasksAfter(tasks.filter(f => f.done === true));
+  //         break;
+  //       case "not_done": SetTasksAfter(tasks.filter(z => z.done === false));
+  //         break;
+  //     }
+  //   }, [tasks, tasksFilter])
 
   return (
     <div>
@@ -56,7 +39,8 @@ export const Users = () => {
       </select> */}
       <br /><br />
       <button> <Link to="newUser">Add User</Link></button>
-      <button> <Link to="showUser">Show User</Link></button>
+      <button onClick={ShowUser(id)}>show user</button>
+      <input type="text" name="userid" placeholder="Enter your id" onChange={e => setId(e.target.value)} />
       <button> <Link to="updateUser">Update User</Link></button>
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
