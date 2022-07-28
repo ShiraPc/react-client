@@ -12,7 +12,7 @@ import axios from 'axios';
 // }
 
 //קבלת משתמש
-export const loadUser = async (id) => 
+export const loadCustomer = async (id) => 
 {
     try {
         const { user } = await axios.get('https://meetings-test.herokuapp.com/user/${id}');
@@ -23,7 +23,7 @@ export const loadUser = async (id) =>
 }
 
 //הוספת משתמש-v
-export const addUser = async (user) => 
+export const addCustomer = async (user) => 
 {
     try {
         return await axios.post('https://meetings-test.herokuapp.com/user/',user);} 
@@ -32,7 +32,7 @@ export const addUser = async (user) =>
 }
 
 //עדכון משתמש-v
-export const Updateuser = async (id, user) => 
+export const Updatecustomer = async (id, user) => 
 {
     try {
         return await axios.put('https://meetings-test.herokuapp.com/user'+id,user);} 

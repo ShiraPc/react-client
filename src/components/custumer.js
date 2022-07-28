@@ -1,35 +1,37 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { usersState } from '../data/atoms';
-import { Updateuser } from '../data/usersApi';
+// import { usersState } from '../data/atoms';
+import { Updatecustomer , loadCustomer  } from '../data/customersApi';
 
-export const User = (props) => {
+export const Customer = async (props) => {
     // const { userId } = useParams();
     const location = useLocation();
     const form = location.state;
     console.log(form.id);
-    const [users, setUsers] = useRecoilState(usersState);
+    // const [users, setUsers] = useRecoilState(usersState);
     const navigate = useNavigate();
-    const user = users.find(u => u.id === (parseInt(form.id)));
+    const customer = await loadCustomer(form.id);
     // const user = {name:"iih", id:userId};
-    console.log(user);
-    const [name, setName] = useState(user?.name);
+    console.log(customer);
+    const [name, setName] = useState(customer?.name);
+    const [password, setPassword] = useState(customer?.password);
     // const [done, setDone] = useState(task?.done);
     //  שמספר המשימות יהיו משהו גלובלי
     // const [count,setCount] = useRecoilState(countState);
     // setCount(count);
     //  הפונקציה תרוץ רק כאשר משתנה אחד הפרמטרים במערך שנשלח
     useEffect(() => {
-        if (!user) {
-            console.log('no users');
+        if (!customer) {
+            console.log('no user');
             navigate('/user');  // דוגמא לניווט ע"י קוד
         }
         else {
-            setName(user.name);
+            setName(customer.name);
+            setPassword(customer.password);
             // setDone(task.done);
         }
-    }, [form.id, user]);
+    }, [form.id, customer]);
     useEffect(() => {
         console.log('run after every state or prop change');
     });
@@ -37,11 +39,11 @@ export const User = (props) => {
         console.log('call once at the first render');
     }, []);
 
-    const arr = [...users];
-    console.log(arr);
+    // const arr = [...users];
+    // console.log(arr);
     let id;
-    if (user)
-        id = user.id;
+    if (customer)
+        id = customer.id;
 
     const save = async(event) => {
         console.log("save");
@@ -62,13 +64,15 @@ export const User = (props) => {
         // console.log(arr);
         //
         event.preventDefault();
-        const newUser =
+        const newCustomer =
         {
-            id,
-            name,
+            user:{
+                name,
+                password
+            }
             // done,
         };
-        console.log(newUser);
+        console.log(newCustomer);
         //לפני קריאות שרת
         // setName('');
         // let newCount=count+1;
@@ -76,7 +80,7 @@ export const User = (props) => {
 
         //אחרי קריאות שרת
         //עובד עדכון משימה ב"ה
-        await Updateuser(id, newUser);
+        await Updatecustomer(id, newCustomer);
         // .then(()=>{
         //     loadUsers().then((data)=>{
         //       setUsers([...data]);  
@@ -105,20 +109,21 @@ export const User = (props) => {
     // }
 
 
-    return user ?
+    return newCustomer ?
         <form onSubmit={save}>
             <label>id:
-                <h5>{user.id}</h5>
+                <h5>{newCustomer.id}</h5>
             </label>
             <label>name:
                 <input type="text" value={name} placeholder={name} onChange={e => setName(e.target.value)} /> <br />
             </label>
             <br />
-            {/* <label> doing? <input type="checkbox" checked={done} onChange={a => setDone(Boolean(a.target.value))} ></input></label> */}
-            <br />
+            <label>password:
+                <input type="text" value={password} placeholder={password} onChange={e => setPassword(e.target.value)}/> <br />
+            </label>
             <button type="submit">שמור</button>
             <br /><br />
-            <button onClick={() => Updateuser(user)}>Update</button>
+            <button onClick={() => Updatecustomer(newCustomer.id, newCustomer)}>Update</button>
         </form> : ' ';
 
 }
