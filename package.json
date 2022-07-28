@@ -10,10 +10,6 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
-<<<<<<< HEAD
-=======
-    "hooks": "^0.3.2",
->>>>>>> 79872c417426613d4b6df4097cb03eb86f718301
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hooks": "^1.0.1",

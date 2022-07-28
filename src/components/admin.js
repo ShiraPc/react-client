@@ -12,6 +12,9 @@ export const Admin = () => {
   const ShowUser = (id) => {
     navigate('showUser', {state:{id: id}});
   }
+
+  const [business,setbusiness]=useState();
+
   //   useEffect(() => {
   //     switch (tasksFilter) {
   //       case "all": SetTasksAfter(tasks);
@@ -35,6 +38,8 @@ export const Admin = () => {
       <button onClick={ShowUser(id)}>show user</button>
       <input type="text" name="userid" placeholder="Enter your id" onChange={e => setId(e.target.value)} />
       <button> <Link to="updateUser">Update User</Link></button>
+      <button> <Link to="addBusiness">Add Business</Link></button>
+      
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
       {/* <ul>

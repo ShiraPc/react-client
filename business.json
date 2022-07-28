@@ -3,6 +3,7 @@
     "businessDetails":{
         "ownersName": "Shira&esti",
         "businessName": "hair style course",
+        "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCEV8Evzb1J5Pw4HIUzgm1pnbXOJfziG-xAg&usqp=CAU",
         "description":"a great place for learning hair style. to look good every day!",
         "services":[
                 {
