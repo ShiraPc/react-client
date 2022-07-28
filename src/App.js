@@ -32,7 +32,6 @@ function App() {
         </React.Suspense>
       </div>
       {/* </React.Suspense> */}
-   
     </RecoilRoot>
   );
 }
