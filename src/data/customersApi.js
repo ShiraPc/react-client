@@ -15,8 +15,8 @@ import axios from 'axios';
 export const loadCustomer = async (id) => 
 {
     try {
-        const { user } = await axios.get('https://meetings-test.herokuapp.com/user/${id}');
-        return user;
+        const user  = await axios.get('https://meetings-test.herokuapp.com/user/'+id);
+        return user.data;
     } 
     catch (error) {
         console.log('error in get user');}

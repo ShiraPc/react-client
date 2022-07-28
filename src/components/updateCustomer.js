@@ -1,25 +1,26 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useRecoilState } from 'recoil';
 import { CustomerContext } from '../context/customer.context';
 import { useNavigate } from 'react-router-dom';
-import { Updatecustomer , loadCustomer } from '../data/usersApi';
+import { Updatecustomer , loadCustomer } from '../data/customersApi';
 
-export const UpdateCustomer = (id, customer) => {
+export const UpdateCustomer = (id, c) => {
     const navigate = useNavigate();
-    const [name, setName] = useState(customer.name);
-    const [password, setPassword] = useState(customer.password);
+    const [name, setName] = useState(c.name);
+    const [password, setPassword] = useState(c.password);
     const { Customer } = useContext(CustomerContext);
+    const customer = Customer(parseInt(id));
 
-    Customer.name = name;
-    Customer.password = password;
+    customer.name = name;
+    customer.password = password;
 
     const formEl = useRef();
 
     formEl.current.reset();
-    console.log(userToUpdate);
+    console.log(customer);
 
     const Update= async()=>{
-        await Updatecustomer(user);
+        await Updatecustomer(customer.id, customer);
         // .then(() => {
         //     loadUsers().then((data) => {
         //         setUsers([...data]);
@@ -33,10 +34,10 @@ export const UpdateCustomer = (id, customer) => {
 
     // את המשתנה שהוגדר באמצעות usesRef
     // יש למקם על האלמנט שאותו רוצים לשלוף, על המאפיין ref
-    return <form onSubmit={UpdateUser} ref={formEl}>
-        <h3>Update User</h3>
+    return <form onSubmit={Update} ref={formEl}>
+        <h3>Update Customer</h3>
         <input type="text" placeholder="name" value={name} onChange={e => setName(e.target.value)} /> <br />
         <input type="text" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} /> <br />
-        <button type="submit">Update User</button>
+        <button type="submit">Update Customer</button>
     </form>
 }
