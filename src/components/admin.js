@@ -7,12 +7,8 @@ import { useRecoilState } from 'recoil';
 export const Admin = () => {
 //   const [users, setUsers] = useRecoilState(usersState);
   const [id, setId] = useState(null);
-  const navigate = useNavigate();
-  const ShowUser = (id) => {
-    navigate('showUser', {state:{id: id}});
-  }
+  
 
-  const [business,setbusiness]=useState();
 
   //   useEffect(() => {
   //     switch (tasksFilter) {
@@ -31,9 +27,8 @@ export const Admin = () => {
       <button> <Link to="newCustomer">Add Customer</Link></button>
       <button> <Link to={`showCustomer/${id}`}>show Customer</Link></button>
       <input type="text" name="userid" placeholder="Enter your id" onChange={e => setId(e.target.value)} />
-      <button> <Link to="updateUser">Update User</Link></button>
-      <button> <Link to="addBusiness">Add Business</Link></button>
-      
+      <button> <Link to="${id}">Update Customer</Link></button>
+      <button><Link to="addBusiness">Add Business</Link></button>
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
       {/* <ul>
@@ -47,4 +42,4 @@ export const Admin = () => {
       <Outlet />
     </div>
   );
-};
+    }
