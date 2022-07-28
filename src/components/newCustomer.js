@@ -1,37 +1,43 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useRecoilState } from 'recoil';
-import { usersState } from '../data/atoms';
+import { CustomerContext } from '../context/customer.context';
 import {  useNavigate } from 'react-router-dom';
-import { addUser } from '../data/usersApi';
+import { addCustomer } from '../data/customersApi';
 
-export const NewUser = () => {
+export const NewCustomer = () => {
     const navigate = useNavigate();
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [users, setUsers] = useRecoilState(usersState);
+    const { addCustomer } = useContext(CustomerContext);
+
+    //const [users, setUsers] = useRecoilState(usersState);
     const formEl = useRef();
     //פונקצית הוספת משתמש
-    const addNewUser = async (e) => {
+    const addNewCustomer = async (e) => {
         e.preventDefault();
-        const user =
+        const customer =
         {
-            username,
-            password
+            "user":{
+                username,
+                password
+            }
         };
-        const newUser = {
-            user
-        };
+        // const newUser = {
+        //     user
+        // };
         // const UserToAdd = {
         //     newUser
         // }
-        let o = new Object(newUser);
-        console.log(o);
+        // let o = new Object(newUser);
+        console.log(customer);
 
         formEl.current.reset();
         setUserName('');
         setPassword('');
 
-        await addUser(o);
+        const c =  await addCustomer(customer);
+        console.log(c);
+        addCustomer(c);
         // .then(() => {
         //     loadUsers().then((data) => {
         //         setUsers([...data]);
@@ -42,10 +48,10 @@ export const NewUser = () => {
    
     // את המשתנה שהוגדר באמצעות usesRef
     // יש למקם על האלמנט שאותו רוצים לשלוף, על המאפיין ref
-    return <form onSubmit={addNewUser} ref={formEl}>
-        <h3>Add User</h3>
+    return <form onSubmit={addNewCustomer} ref={formEl}>
+        <h3>Add Customer</h3>
         <input type="text" placeholder="username" value={username} onChange={e => setUserName(e.target.value)} /> <br />
         <input type="text" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} /> <br />
-        <button type="submit">Add User</button>
+        <button type="submit">Add Customer</button>
     </form>
 }

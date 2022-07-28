@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 // import { usersState } from '../data/atoms.js';
-import { CustomerContext } from '../context/customer.context';
+// import { CustomerContext } from '../context/customer.context';
 import { useNavigate } from 'react-router-dom';
 
 export const Admin = () => {
@@ -10,7 +10,7 @@ export const Admin = () => {
   const [id, setId] = useState(null);
   const navigate = useNavigate();
   const ShowUser = (id) => {
-    navigate('showUser', {state:{id: id}});
+    navigate('showCustomer', {state:{id: id}});
   }
   //   useEffect(() => {
   //     switch (tasksFilter) {
@@ -31,10 +31,10 @@ export const Admin = () => {
         <option value="not_done">not done</option>
       </select> */}
       <br /><br />
-      <button> <Link to="newUser">Add User</Link></button>
-      <button onClick={ShowUser(id)}>show user</button>
+      <button> <Link to="newCustomer">Add Customer</Link></button>
+      {/* <button onClick={ShowUser(id)}>show Customer</button> */}
       <input type="text" name="userid" placeholder="Enter your id" onChange={e => setId(e.target.value)} />
-      <button> <Link to="updateUser">Update User</Link></button>
+      <button> <Link to="updateCustomer">Update Customer</Link></button>
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
       {/* <ul>

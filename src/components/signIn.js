@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useRecoilState, useSetRecoilState } from 'recoil';
 // import { usersState } from '../data/atoms';
-// import { loadUsers, UpdateUser, loadUser } from '../data/usersApi';
+import { loadCustomer } from '../data/customersApi';
 
 
 export const SignIn = () => {
@@ -41,10 +41,11 @@ export const SignIn = () => {
         // let newCount=count+1;
         // setCount(newCount);      
     }
-    const passwordManager = "2468";
-    const CheckValid = (id, name) => {
-        if (id === passwordManager && name === "Shira&esti")
-            navigate('/user/admin');
+    const passwordManager = "123456";
+    const CheckValid = async (password, name) => {
+       const c =  await loadCustomer("25e9c763-cac9-41ff-b0dc-aa15dfef5327");
+        if (password === c.password && name === c.username)
+            navigate('/user');
         else
             alert('you cant goto manage page');
     };

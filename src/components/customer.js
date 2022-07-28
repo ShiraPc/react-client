@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 // import { usersState } from '../data/atoms';
 import { Updatecustomer , loadCustomer  } from '../data/customersApi';
 
@@ -32,12 +31,6 @@ export const Customer = async (props) => {
             // setDone(task.done);
         }
     }, [form.id, customer]);
-    useEffect(() => {
-        console.log('run after every state or prop change');
-    });
-    useEffect(() => {
-        console.log('call once at the first render');
-    }, []);
 
     // const arr = [...users];
     // console.log(arr);
@@ -109,10 +102,10 @@ export const Customer = async (props) => {
     // }
 
 
-    return newCustomer ?
+    return customer ?
         <form onSubmit={save}>
             <label>id:
-                <h5>{newCustomer.id}</h5>
+                <h5>{customer.id}</h5>
             </label>
             <label>name:
                 <input type="text" value={name} placeholder={name} onChange={e => setName(e.target.value)} /> <br />
@@ -123,7 +116,7 @@ export const Customer = async (props) => {
             </label>
             <button type="submit">שמור</button>
             <br /><br />
-            <button onClick={() => Updatecustomer(newCustomer.id, newCustomer)}>Update</button>
+            <button onClick={() => Updatecustomer(customer.id, customer)}>Update</button>
         </form> : ' ';
 
 }

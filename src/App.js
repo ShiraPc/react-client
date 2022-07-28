@@ -3,13 +3,12 @@ import './App.css';
 import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import { User } from "./components/user";
-import { Users } from "./components/users";
+import { Customer } from "./components/customer";
+import { Admin } from "./components/admin";
 import { Menu } from "./components/menu";
 import { SignIn } from "./components/signIn";
-import { Admin } from "./components/admin";
-import { NewUser } from "./components/newUser";
-import { UpdateUser } from "./components/updateUser";
+import { NewCustomer } from "./components/newCustomer";
+import { UpdateCustomer } from "./components/updateCustomer";
 
 function App() {
   return (
@@ -19,10 +18,9 @@ function App() {
       <Menu />
       <div>
         <Routes>
-          <Route exact path="/user" element={<Users />}>
-              <Route exact path="showUser" element={<User/>} />
-              <Route exact path="admin" element={<Admin />} />
-              <Route exact path="newUser" element={< NewUser />} /> 
+          <Route exact path="/user" element={<Admin />}>
+              <Route exact path="showCustomer" element={<Customer/>} />
+              <Route exact path="newCustomer" element={< NewCustomer />} /> 
              {/* <Route exact path=":id" element={< UpdateUser />} />  */}
              </Route>
              <Route path="signIn" element={<SignIn />} />
