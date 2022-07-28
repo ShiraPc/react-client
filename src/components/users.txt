@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useRecoilState } from 'recoil';
-// import { usersState } from '../data/atoms.js';
-import { CustomerContext } from '../context/customer.context';
+import { usersState } from '../data/atoms.js';
 import { useNavigate } from 'react-router-dom';
 
-export const Admin = () => {
-//   const [users, setUsers] = useRecoilState(usersState);
+export const Users = () => {
+  const [users, setUsers] = useRecoilState(usersState);
   const [id, setId] = useState(null);
+  console.log(users);
+  const [usersAfter, SetUsersAfter] = useState(users);
   const navigate = useNavigate();
   const ShowUser = (id) => {
     navigate('showUser', {state:{id: id}});
   }
+
+  useEffect(() => {
+    console.log('useEffect');
+    SetUsersAfter(users);
+  }, [users]);
+
   //   useEffect(() => {
   //     switch (tasksFilter) {
   //       case "all": SetTasksAfter(tasks);

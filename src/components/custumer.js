@@ -1,34 +1,37 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { usersState } from '../data/atoms';
-import { loadUsers, UpdateUser, loadUser } from '../data/usersApi';
+// import { usersState } from '../data/atoms';
+import { Updatecustomer , loadCustomer  } from '../data/customersApi';
 
-export const User = () => {
-    const { userId } = useParams();
-    console.log(userId);
-    const usersnow = [{name:"iih", id:userId}, {name:"iii", id:"84545"}]
-    const [users, setUsers] = useRecoilState(usersState);
+export const Customer = async (props) => {
+    // const { userId } = useParams();
+    const location = useLocation();
+    const form = location.state;
+    console.log(form.id);
+    // const [users, setUsers] = useRecoilState(usersState);
     const navigate = useNavigate();
-    const user = users.find(u => u.id === (parseInt(userId)));
+    const customer = await loadCustomer(form.id);
     // const user = {name:"iih", id:userId};
-    console.log(user);
-    const [name, setName] = useState(user?.name);
+    console.log(customer);
+    const [name, setName] = useState(customer?.name);
+    const [password, setPassword] = useState(customer?.password);
     // const [done, setDone] = useState(task?.done);
     //  שמספר המשימות יהיו משהו גלובלי
     // const [count,setCount] = useRecoilState(countState);
     // setCount(count);
     //  הפונקציה תרוץ רק כאשר משתנה אחד הפרמטרים במערך שנשלח
     useEffect(() => {
-        if (!user) {
-            console.log('no users');
-            navigate('/users');  // דוגמא לניווט ע"י קוד
+        if (!customer) {
+            console.log('no user');
+            navigate('/user');  // דוגמא לניווט ע"י קוד
         }
         else {
-            setName(user.name);
+            setName(customer.name);
+            setPassword(customer.password);
             // setDone(task.done);
         }
-    }, [userId, user]);
+    }, [form.id, customer]);
     useEffect(() => {
         console.log('run after every state or prop change');
     });
@@ -36,11 +39,11 @@ export const User = () => {
         console.log('call once at the first render');
     }, []);
 
-    const arr = [...users];
-    console.log(arr);
+    // const arr = [...users];
+    // console.log(arr);
     let id;
-    if (user)
-        id = user.id;
+    if (customer)
+        id = customer.id;
 
     const save = async(event) => {
         console.log("save");
@@ -61,13 +64,15 @@ export const User = () => {
         // console.log(arr);
         //
         event.preventDefault();
-        const newUser =
+        const newCustomer =
         {
-            id,
-            name,
+            user:{
+                name,
+                password
+            }
             // done,
         };
-        console.log(newUser);
+        console.log(newCustomer);
         //לפני קריאות שרת
         // setName('');
         // let newCount=count+1;
@@ -75,11 +80,12 @@ export const User = () => {
 
         //אחרי קריאות שרת
         //עובד עדכון משימה ב"ה
-        await UpdateUser(id, newUser).then(()=>{
-            loadUsers().then((data)=>{
-              setUsers([...data]);  
-            });
-           });
+        await Updatecustomer(id, newCustomer);
+        // .then(()=>{
+        //     loadUsers().then((data)=>{
+        //       setUsers([...data]);  
+        //     });
+        //    });
       
         navigate('/user'); // ניווט חזרה למשימות
     }
@@ -103,20 +109,21 @@ export const User = () => {
     // }
 
 
-    return user ?
+    return newCustomer ?
         <form onSubmit={save}>
             <label>id:
-                <h5>{user.id}</h5>
+                <h5>{newCustomer.id}</h5>
             </label>
             <label>name:
                 <input type="text" value={name} placeholder={name} onChange={e => setName(e.target.value)} /> <br />
             </label>
             <br />
-            {/* <label> doing? <input type="checkbox" checked={done} onChange={a => setDone(Boolean(a.target.value))} ></input></label> */}
-            <br />
+            <label>password:
+                <input type="text" value={password} placeholder={password} onChange={e => setPassword(e.target.value)}/> <br />
+            </label>
             <button type="submit">שמור</button>
             <br /><br />
-            <button onClick={() => UpdateUser(user)}>Update</button>
+            <button onClick={() => Updatecustomer(newCustomer.id, newCustomer)}>Update</button>
         </form> : ' ';
 
 }
