@@ -19,9 +19,9 @@ function App() {
       <div>
         <Routes>
           <Route exact path="/user" element={<Admin />}>
-              <Route exact path="showCustomer" element={<Customer/>} />
+              <Route exact path="showCustomer/:id" element={<Customer/>} />
               <Route exact path="newCustomer" element={< NewCustomer />} /> 
-             {/* <Route exact path=":id" element={< UpdateUser />} />  */}
+              <Route exact path=":id" element={< UpdateCustomer />} /> 
              </Route>
              <Route path="signIn" element={<SignIn />} />
           <Route path="*" element={<h1> A mistake </h1>} />

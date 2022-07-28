@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { useRecoilState, useSetRecoilState } from 'recoil';
 // import { usersState } from '../data/atoms';
 import { loadCustomer } from '../data/customersApi';
+import { CustomerContext } from "../context/customer.context";
 
 
 export const SignIn = () => {
@@ -10,7 +11,7 @@ export const SignIn = () => {
     const [name, setName] = useState("");
     const [id, setId] = useState(null);
     const navigate = useNavigate();
-
+    // const { getCustomer } = useContext(CustomerContext);
     const save = async (event) => {
         console.log("save");
         //לפני קריאות שרת
@@ -41,7 +42,6 @@ export const SignIn = () => {
         // let newCount=count+1;
         // setCount(newCount);      
     }
-    const passwordManager = "123456";
     const CheckValid = async (password, name) => {
        const c =  await loadCustomer("25e9c763-cac9-41ff-b0dc-aa15dfef5327");
         if (password === c.password && name === c.username)

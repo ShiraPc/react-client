@@ -3,15 +3,11 @@ import { Link, Outlet } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 // import { usersState } from '../data/atoms.js';
 // import { CustomerContext } from '../context/customer.context';
-import { useNavigate } from 'react-router-dom';
 
 export const Admin = () => {
 //   const [users, setUsers] = useRecoilState(usersState);
   const [id, setId] = useState(null);
-  const navigate = useNavigate();
-  const ShowUser = (id) => {
-    navigate('showCustomer', {state:{id: id}});
-  }
+
   //   useEffect(() => {
   //     switch (tasksFilter) {
   //       case "all": SetTasksAfter(tasks);
@@ -25,16 +21,11 @@ export const Admin = () => {
 
   return (
     <div>
-      {/* <select onChange={(event) => SetTasksFilter(event.target.value)}>
-        <option value="all">all</option>
-        <option value="done">done</option>
-        <option value="not_done">not done</option>
-      </select> */}
       <br /><br />
       <button> <Link to="newCustomer">Add Customer</Link></button>
-      {/* <button onClick={ShowUser(id)}>show Customer</button> */}
+      <button> <Link to={`showCustomer/${id}`}>show Customer</Link></button>
       <input type="text" name="userid" placeholder="Enter your id" onChange={e => setId(e.target.value)} />
-      <button> <Link to="updateCustomer">Update Customer</Link></button>
+      <button> <Link to="${id}">Update Customer</Link></button>
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
       {/* <ul>
