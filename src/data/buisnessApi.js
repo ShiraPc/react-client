@@ -6,9 +6,9 @@ import axios from 'axios';
 export const addBusiness = async (userId,business) => 
 {
     try {
-        return await axios.post('https://meetings-test.herokuapp.com/business/'+userId, business.json());} 
+        return await axios.post('https://meetings-test.herokuapp.com/business/'+ userId, business.json());} 
     catch (error){
-        console.log('caan not add business',error);}
+        console.log('can not add business',error);}
 }
 
 //GET /business/:userId - get business details of specific user id.

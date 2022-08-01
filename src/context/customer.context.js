@@ -7,7 +7,7 @@ export const CustomerContextComponent = (props) => {
     const [_customer, setCustomer] = useState([]);
 
     useEffect(async () => {
-        const { data } = await loadCustomer("25e9c763-cac9-41ff-b0dc-aa15dfef5327");
+        const { data } = await loadCustomer("471d8e8d-e085-481a-b5bb-16f39d56d933");
         setCustomer(data);
     }, []);
 

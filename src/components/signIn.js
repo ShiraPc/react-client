@@ -43,7 +43,7 @@ export const SignIn = () => {
         // setCount(newCount);      
     }
     const CheckValid = async (password, name) => {
-       const c =  await loadCustomer("25e9c763-cac9-41ff-b0dc-aa15dfef5327");
+       const c =  await loadCustomer("471d8e8d-e085-481a-b5bb-16f39d56d933");
         if (password === c.password && name === c.username)
             navigate('/user');
         else
@@ -52,7 +52,7 @@ export const SignIn = () => {
     return(
     <form onSubmit={save}>
         <label>
-            <input type="text" id="password" name="password" type="password" placeholder={"password"} onChange={e => setId(e.target.value)} />
+            <input type="password" id="password" name="password" placeholder={"password"} onChange={e => setId(e.target.value)} />
         </label>
         <label>
             <input type="text" placeholder={"name"} onChange={e => setName(e.target.value)} /> <br />

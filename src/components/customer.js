@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 // import { usersState } from '../data/atoms';
 import { Updatecustomer, loadCustomer } from '../data/customersApi';
-
 export const Customer = () => {
     const { id } = useParams();
     // const location = useLocation();
@@ -14,27 +13,23 @@ export const Customer = () => {
     const loadcustomer = async () => {
         customer = await loadCustomer(id);
     }
-
-    const show = async () => {
-        await loadcustomer();
-        const [name, setName] = useState(customer?.name);
-        const [password, setPassword] = useState(customer?.password);
+    const [username, setName] = useState(customer?.username);
+    const [password, setPassword] = useState(customer?.password);
+    useEffect(() => {
+        if (!customer) {
+            console.log('no user');
+            navigate('/user');  // דוגמא לניווט ע"י קוד
+        }
+        else {
+            setName(customer.username);
+            setPassword(customer.password);
+            // setDone(task.done);
+        }
+    }, [id, customer]);
         //  הפונקציה תרוץ רק כאשר משתנה אחד הפרמטרים במערך שנשלח
-        useEffect(() => {
-            if (!customer) {
-                console.log('no user');
-                navigate('/user');  // דוגמא לניווט ע"י קוד
-            }
-            else {
-                setName(customer.username);
-                setPassword(customer.password);
-                // setDone(task.done);
-            }
-        }, [id, customer]);
         let idu;
         if (customer)
             idu = customer.id;
-    
         const save = async (event) => {
             console.log("save");
             event.preventDefault();
@@ -46,33 +41,19 @@ export const Customer = () => {
                 }
             };
             console.log(newCustomer);
-            await Updatecustomer(idu, newCustomer);
+            // await Updatecustomer(idu, newCustomer);
             navigate('/user'); // ניווט חזרה למשימות
         }
+    const show = async () => {
+        await loadcustomer();
     }
-    // const user = {name:"iih", id:userId};
-
-
-    // const arr = [...users];
-    // console.log(arr);
-    export const addBusiness = async (userId) =>
-    {
-
-        try {
-            return await axios.post('https://meetings-test.herokuapp.com/business/',userId, business.json());}
-        catch (error){
-            console.log('caan not add business',error);}
-    }
-
-
-
     return customer ?
         <form onSubmit={save}>
             <label>id:
                 <h5>{customer.id}</h5>
             </label>
             <label>name:
-                <input type="text" value={name} placeholder={name} onChange={e => setName(e.target.value)} /> <br />
+                <input type="text" value={username} placeholder={username} onChange={e => setName(e.target.value)} /> <br />
             </label>
             <br />
             <label>password:
@@ -82,5 +63,4 @@ export const Customer = () => {
             <br /><br />
             <button onClick={() => Updatecustomer(customer.id, customer)}>Update</button>
         </form> : ' ';
-
 }

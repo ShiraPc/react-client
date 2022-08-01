@@ -27,8 +27,8 @@ export const Admin = () => {
       <button> <Link to="newCustomer">Add Customer</Link></button>
       <button> <Link to={`showCustomer/${id}`}>show Customer</Link></button>
       <input type="text" name="userid" placeholder="Enter your id" onChange={e => setId(e.target.value)} />
-      <button> <Link to="${id}">Update Customer</Link></button>
-      <button><Link to="addBusiness">Add Business</Link></button>
+      {/* <button> <Link to="${id}">Update Customer</Link></button> */}
+      <button><Link to="/business/addBusiness">Add Business</Link></button>
       <br />
       {/* <button onClick={deleteALL}>delete done</button> */}
       {/* <ul>
