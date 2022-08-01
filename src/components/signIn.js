@@ -51,7 +51,7 @@ export const SignIn = () => {
     return(
     <form onSubmit={save}>
         <label>
-            <input type="text" id="password" name="password" type="password" placeholder={"password"} onChange={e => setId(e.target.value)} />
+            <input type="password" id="password" name="password" placeholder={"password"} onChange={e => setId(e.target.value)} />
         </label>
         <label>
             <input type="text" placeholder={"name"} onChange={e => setName(e.target.value)} /> <br />
